@@ -1,27 +1,32 @@
-﻿namespace NeoCortexApi
+﻿using System;
+using System.Collections.Generic;
+using NeoCortexApi.Encoders;
+
+namespace NeoCortexApi
 {
     public class ScalarEncoder2
     {
-        public int[] getBucketIndices(String input)
+        public int[] getBucketIndices(string input)
         {
-            TIntList l = new TIntArrayList();
-            Map<EncoderTuple, List<EncoderTuple>> encoders = getEncoders();
+            List<int> l = new List<int>();
+            Dictionary<EncoderTuple, List<EncoderTuple>> encoders = getEncoders();
             if (((encoders != null)
-                 && (encoders.size() > 0)))
+                 && (encoders.Count > 0)))
             {
-                foreach (EncoderTuple t in encoders.keySet())
+                foreach (EncoderTuple t in encoders.Keys)
                 {
                     l.addAll(t.getEncoder().getBucketIndices(input));
+                    
                 }
 
             }
             else
             {
-                throw new IllegalStateException(("Should be implemented in base classes that are not " +
-                                                 "containers for other encoders"));
+                throw new ArgumentException (("Should be implemented in base classes that are not " +
+                                             "containers for other encoders"));
             }
 
-            return l.toArray();
+            return l.ToArray();
         }
     }
 }
