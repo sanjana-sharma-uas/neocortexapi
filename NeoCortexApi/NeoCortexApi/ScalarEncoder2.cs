@@ -16,17 +16,38 @@ namespace NeoCortexApi
                 foreach (EncoderTuple t in encoders.Keys)
                 {
                     l.addAll(t.getEncoder().getBucketIndices(input));
-                    
+
                 }
 
             }
             else
             {
-                throw new ArgumentException (("Should be implemented in base classes that are not " +
+                throw new ArgumentException(("Should be implemented in base classes that are not " +
                                              "containers for other encoders"));
             }
 
             return l.ToArray();
         }
+    
+
+
+public int[] getBucketIndices(double input) {
+    List<int> l = new List<int>();
+    Dictionary<EncoderTuple, List<EncoderTuple>> encoders = getEncoders();
+        if (((encoders != null)
+    && (encoders.Count > 0)))
+    {
+        foreach (EncoderTuple t in encoders.Keys) {
+            l.addAll(t.getEncoder().getBucketIndices(input));
+        }
+            
     }
+    else {
+        throw new ArgumentException(("Should be implemented in base classes that are not " + "containers for other encoders"));
+    }
+        
+    return l.ToArray();
+    }
+   }
 }
+
