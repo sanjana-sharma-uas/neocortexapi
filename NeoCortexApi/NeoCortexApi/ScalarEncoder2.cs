@@ -4,8 +4,35 @@ using NeoCortexApi.Encoders;
 
 namespace NeoCortexApi
 {
-    public class ScalarEncoder2
-    {
+    public class ScalarEncoder2{
+        
+        protected SortedDictionary<EncoderTuple, List<EncoderTuple>> encoders;
+        
+        public SortedDictionary<EncoderTuple, List<EncoderTuple>> getEncoders() {
+            if(encoders == null) {
+                encoders = new SortedDictionary<EncoderTuple, List<EncoderTuple>>();
+            }
+            return encoders;
+        }
+     
+  
+
+    public EncoderTuple getEncoderTuple(ScalarEncoder2 e) {
+            if (encoders == null) {
+                encoders = new SortedDictionary<EncoderTuple, List<EncoderTuple>>();
+            }
+            
+            foreach (EncoderTuple tuple in encoders.Keys) {
+                if (tuple.getEncoder.equals(e)) {
+                    return tuple;
+                }
+                
+            }
+            
+            return null;
+        }
+
+    
         public int[] getBucketIndices(string input)
         {
             List<int> l = new List<int>();
