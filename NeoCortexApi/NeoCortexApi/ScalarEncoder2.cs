@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using NeoCortexApi.Encoders;
-
+using System.Text;
+using EncoderTupleModel = NeoCortexApi.Encoders.EncoderTuple;
+using NeoCortexApi.Utility;
 namespace NeoCortexApi
 {
-    public class ScalarEncoder2{
+    public class ScalarEncoder2 {
         
-        protected SortedDictionary<EncoderTuple, List<EncoderTuple>> encoders;
+        protected SortedDictionary<EncoderTuple, List<EncoderTupleModel>> encoders;
         
-        public SortedDictionary<EncoderTuple, List<EncoderTuple>> getEncoders() {
+        public SortedDictionary<EncoderTuple, List<EncoderTupleModel>> getEncoders() {
             if(encoders == null) {
-                encoders = new SortedDictionary<EncoderTuple, List<EncoderTuple>>();
+                encoders = new SortedDictionary<EncoderTuple, List<EncoderTupleModel>>();
             }
             return encoders;
         }
@@ -19,11 +20,11 @@ namespace NeoCortexApi
 
     public EncoderTuple getEncoderTuple(ScalarEncoder2 e) {
             if (encoders == null) {
-                encoders = new SortedDictionary<EncoderTuple, List<EncoderTuple>>();
+                encoders = new SortedDictionary<EncoderTuple, List<EncoderTupleModel>>();
             }
             
             foreach (EncoderTuple tuple in encoders.Keys) {
-                if (tuple.getEncoder.equals(e)) {
+                if (tuple.GetEncoder().Equals(e)) {
                     return tuple;
                 }
                 
@@ -36,13 +37,13 @@ namespace NeoCortexApi
         public int[] getBucketIndices(string input)
         {
             List<int> l = new List<int>();
-            Dictionary<EncoderTuple, List<EncoderTuple>> encoders = getEncoders();
+            SortedDictionary<EncoderTuple, List<EncoderTupleModel>> encoders = getEncoders();
             if (((encoders != null)
                  && (encoders.Count > 0)))
             {
                 foreach (EncoderTuple t in encoders.Keys)
                 {
-                    l.addAll(t.getEncoder().getBucketIndices(input));
+                   l.AddRange(getBucketIndices(input));
 
                 }
 
@@ -60,12 +61,12 @@ namespace NeoCortexApi
 
 public int[] getBucketIndices(double input) {
     List<int> l = new List<int>();
-    Dictionary<EncoderTuple, List<EncoderTuple>> encoders = getEncoders();
+    SortedDictionary<EncoderTuple, List<EncoderTupleModel>> encoders = getEncoders();
         if (((encoders != null)
     && (encoders.Count > 0)))
     {
         foreach (EncoderTuple t in encoders.Keys) {
-            l.addAll(t.getEncoder().getBucketIndices(input));
+            //l.Add(t.GetEncoder());
         }
             
     }

@@ -1,46 +1,45 @@
-﻿    using System;
-    using System.Text;
-    using NeoCortexApi.Entities;
+﻿using System;
+using System.Text;
+using NeoCortexApi.Entities;
 
-    namespace NeoCortexApi.Utility
+namespace NeoCortexApi.Utility
+{
+    public class EncoderTuple : Tuple
     {
-        public class EncoderTuple : Tuple
-        {
+        private static long serialVersionUID;
+    
 
-            private static long serialVersionUID;
-        }
-
-        public class EncoderTuple
+    
+        public EncoderTuple(String name, Encoder e, int offset)
+        
+            : base(name, e, offset)
         {
-            publicEncoderTuple(String, name, Encoder, <, Question, Greater, e, int, offset);
+            if ((name == null))
             {
-                base.(name, e, offset);
-                if ((name == null))
-                {
-                    throw new ArgumentException(("Can\'t instantiate an EncoderTuple " + " with a null Name"));
-                }
+                throw new ArgumentException(("Can\'t instantiate an EncoderTuple " + " with a null Name"));
+            }
 
-                if ((e == null))
-                {
-                    throw new ArgumentException(("Can\'t instantiate an EncoderTuple " + " with a null Encoder"));
-                }
-
-
-                public String getName()
-                {
-                    return ((String) (get(0)));
-                }
-
-                public Encoder getEncoder()
-                {
-                    return ((Encoder) (get(1)));
-                }
-
-                public int getOffset()
-                {
-                    return ((Integer) (get(2)));
-                }
+            if ((e == null))
+            {
+                throw new ArgumentException(("Can\'t instantiate an EncoderTuple " + " with a null Encoder"));
             }
         }
+
+
+        public String GetName()
+        {
+            return (String)Get(0);
+        }
+
+        public Encoder GetEncoder()
+        {
+            return (Encoder)Get(1);
+        }
+
+        public int GetOffset()
+        {
+            return (Integer)Get(2);
+        }
     }
-    
+}
+
